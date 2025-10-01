@@ -111,7 +111,7 @@ public class CellBroadcastSettings extends CollapsingToolbarBaseActivity {
     public static final String KEY_CATEGORY_ALERT_PREFERENCES = "category_alert_preferences";
 
     // Show checkbox for Presidential alerts in settings
-    // Whether to display CMAS presidential alert notifications (always enabled).
+    // Whether to display CMAS presidential alert notifications (default is enabled).
     public static final String KEY_ENABLE_CMAS_PRESIDENTIAL_ALERTS =
             "enable_cmas_presidential_alerts";
 
@@ -500,8 +500,10 @@ public class CellBroadcastSettings extends CollapsingToolbarBaseActivity {
                     setAlertsEnabled(false);
                 }
             }
-            // note that mPresidentialCheckBox does not use the startConfigServiceListener because
-            // the user is never allowed to change the preference
+
+            if (mPresidentialCheckBox != null) {
+                mPresidentialCheckBox.setOnPreferenceChangeListener(startConfigServiceListener);
+            }
             if (mAreaUpdateInfoCheckBox != null) {
                 mAreaUpdateInfoCheckBox.setOnPreferenceChangeListener(startConfigServiceListener);
             }
@@ -613,8 +615,9 @@ public class CellBroadcastSettings extends CollapsingToolbarBaseActivity {
             }
 
             if (mPresidentialCheckBox != null) {
-                mPresidentialCheckBox.setVisible(
-                        res.getBoolean(R.bool.show_presidential_alerts_settings));
+                mPresidentialCheckBox.setVisible(res.getBoolean(R.bool.show_presidential_alerts_settings)
+                        && !channelManager.getCellBroadcastChannelRanges(
+                        R.array.cmas_presidential_alerts_channels_range_strings).isEmpty());
                 if (isWatch && !mPresidentialCheckBox.isVisible()) {
                     preferenceScreen.removePreference(mPresidentialCheckBox);
                 }
@@ -813,6 +816,11 @@ public class CellBroadcastSettings extends CollapsingToolbarBaseActivity {
             boolean resetCarrierDefault = res.getBoolean(
                     R.bool.restore_sub_toggle_to_carrier_default);
 
+            if (mPresidentialCheckBox != null) {
+                mPresidentialCheckBox.setEnabled(alertsEnabled);
+                mPresidentialCheckBox.setChecked(resetCarrierDefault ? alertsEnabled && res.getBoolean(
+                        R.bool.cmas_presidential_alerts_enabled_default) : alertsEnabled);
+            }
             if (mSevereCheckBox != null) {
                 mSevereCheckBox.setEnabled(alertsEnabled);
                 mSevereCheckBox.setChecked(resetCarrierDefault ? alertsEnabled && res.getBoolean(
@@ -1100,6 +1108,8 @@ public class CellBroadcastSettings extends CollapsingToolbarBaseActivity {
                 return R.bool.enable_alert_speech_default;
             case KEY_OVERRIDE_DND:
                 return R.bool.override_dnd_default;
+            case KEY_ENABLE_CMAS_PRESIDENTIAL_ALERTS:
+                return R.bool.cmas_presidential_alerts_enabled_default;
             case KEY_ENABLE_CMAS_EXTREME_THREAT_ALERTS:
                 return R.bool.extreme_threat_alerts_enabled_default;
             case KEY_ENABLE_CMAS_SEVERE_THREAT_ALERTS:

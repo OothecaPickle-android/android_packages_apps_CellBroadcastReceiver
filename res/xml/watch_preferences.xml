@@ -49,8 +49,8 @@
                           android:title="@string/enable_cmas_severe_threat_alerts_title" />
 
         <SwitchPreference android:defaultValue="true"
-                          android:selectable="false"
-                          android:enabled="false"
+                          android:selectable="true"
+                          android:enabled="true"
                           android:key="enable_cmas_presidential_alerts"
                           android:title="@string/enable_cmas_presidential_alerts_title" />
 
