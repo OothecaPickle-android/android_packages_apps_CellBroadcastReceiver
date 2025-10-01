@@ -22,7 +22,7 @@
     <!-- Whether to show main switch settings at the top -->
     <bool name="show_main_switch_settings">true</bool>
     <!-- Whether to show presidential alert settings -->
-    <bool name="show_presidential_alerts_settings">false</bool>
+    <bool name="show_presidential_alerts_settings">true</bool>
     <!-- Whether to show extreme alert settings -->
     <bool name="show_extreme_alert_settings">true</bool>
     <!-- Whether to show severe alert settings -->
@@ -80,6 +80,8 @@
     <!-- Section for switch default value -->
     <!-- Main toggle default value -->
     <bool name="master_toggle_enabled_default">true</bool>
+    <!-- Presidential alerts toggle default value -->
+    <bool name="cmas_presidential_alerts_enabled_default">true</bool>
     <!-- Emergency alerts toggle default value -->
     <bool name="emergency_alerts_enabled_default">true</bool>
     <!-- Amber alerts toggle default value -->
@@ -119,10 +121,10 @@
     <string name="emergency_alert_second_language_code" translatable="false"></string>
     <!-- 4370, 4383 -->
     <string-array name="cmas_presidential_alerts_channels_range_strings" translatable="false">
-        <item>0x1112:rat=gsm, emergency=true, always_on=true</item>
-        <item>0x1000:rat=cdma, emergency=true, always_on=true</item>
+        <item>0x1112:rat=gsm, emergency=true</item>
+        <item>0x1000:rat=cdma, emergency=true</item>
         <!-- additional language -->
-        <item>0x111F:rat=gsm, emergency=true, always_on=true</item>
+        <item>0x111F:rat=gsm, emergency=true</item>
     </string-array>
     <!-- 4371~4372, 4384~4385 -->
     <string-array name="cmas_alert_extreme_channels_range_strings" translatable="false">

@@ -274,15 +274,16 @@ public class CellBroadcastConfigService extends IntentService {
 
         // boolean for each user preference checkbox, true for checked, false for unchecked
         // Note: If enableAlertsMasterToggle is false, it disables ALL emergency broadcasts
-        // except for always-on alerts e.g, presidential. i.e. to receive CMAS severe alerts, both
+        // i.e. to receive CMAS severe alerts, both
         // enableAlertsMasterToggle AND enableCmasSevereAlerts must be true.
         boolean enableAlertsMasterToggle = isMasterToggleEnabled();
 
         boolean enableEtwsAlerts = enableAlertsMasterToggle;
 
-        // CMAS Presidential must be always on (See 3GPP TS 22.268 Section 6.2) regardless
-        // user's preference
-        boolean enablePresidential = true;
+        boolean enablePresidential = enableAlertsMasterToggle && (isRoaming
+                ? res.getBoolean(R.bool.cmas_presidential_alerts_enabled_default)
+                : prefs.getBoolean(
+                        CellBroadcastSettings.KEY_ENABLE_CMAS_PRESIDENTIAL_ALERTS, true));
 
         boolean enableCmasExtremeAlerts = enableAlertsMasterToggle && (isRoaming
                 ? res.getBoolean(R.bool.extreme_threat_alerts_enabled_default)

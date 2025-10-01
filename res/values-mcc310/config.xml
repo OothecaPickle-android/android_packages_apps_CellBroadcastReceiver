@@ -19,10 +19,10 @@
     <string name="emergency_alert_second_language_code" translatable="false">es</string>
     <!-- 4370, 4383 -->
     <string-array name="cmas_presidential_alerts_channels_range_strings" translatable="false">
-        <item>0x1112:rat=gsm, emergency=true, always_on=true</item>
-        <item>0x1000:rat=cdma, emergency=true, always_on=true</item>
+        <item>0x1112:rat=gsm, emergency=true</item>
+        <item>0x1000:rat=cdma, emergency=true</item>
         <!-- additional language -->
-        <item>0x111F:rat=gsm, emergency=true, filter_language=true, always_on=true</item>
+        <item>0x111F:rat=gsm, emergency=true, filter_language=true</item>
     </string-array>
     <!-- 4371~4372, 4384~4385 -->
     <string-array name="cmas_alert_extreme_channels_range_strings" translatable="false">
@@ -85,9 +85,7 @@
          we can't use smart linkify. -->
     <string name="link_method" translatable="false">legacy_linkify</string>
 
-    <!-- Whether enabling copy message text into clipboard by long press.
-         FCC does not allow message to be copied/pasted -->
-    <bool name="enable_text_copy">false</bool>
+    <bool name="enable_text_copy">true</bool>
 
     <!-- Whether to enable alert handling during active voice call. -->
     <bool name="enable_alert_handling_during_call">true</bool>
